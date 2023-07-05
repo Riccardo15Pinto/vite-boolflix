@@ -16,7 +16,7 @@ export default {
       return `${uri}movie?api_key=${keyApi}&query=${this.userSearch}&language=it-IT`;
     },
     currentSeriesUserSearch() {
-      return `${uri}tv?api_key=${keyApi}&query=${this.userSearch}&language=it-IT`;
+      return `${uri}tv?api_key=${keyApi}&language=it-IT&query=${this.userSearch}`;
     }
   },
   methods: {
