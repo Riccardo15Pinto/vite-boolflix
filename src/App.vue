@@ -38,7 +38,7 @@ export default {
     },
 
     getCeilAvarage(object) {
-      return Math.ceil(object)
+      return Math.ceil(object / 2);
     },
 
     getImagePoster(object) {
@@ -84,6 +84,7 @@ export default {
         :src="getImagePath(episode.original_language)" alt="">
     </li>
   </ul>
+  <FontAwsomeIcon :icon="['fas', 'star']" />
 </template>
 
 <style scoped></style>
