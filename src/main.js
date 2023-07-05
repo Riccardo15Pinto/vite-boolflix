@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
 import { faStar } from '@fortawesome/free-solid-svg-icons'
-library.add(faStar)
+import { faStar as faEmptyStar} from '@fortawesome/free-regular-svg-icons'
+library.add(faStar , faEmptyStar)
 
 createApp(App)
     .component('FontAwsomeIcon' , FontAwesomeIcon)
