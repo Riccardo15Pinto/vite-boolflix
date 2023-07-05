@@ -10,34 +10,31 @@ export default {
   data() {
     return {
       store,
-      userSearch: '',
-    }
+    };
   },
 
-  computed: {
-    currentMovieUserSearch() {
-      return `${uri}movie?api_key=${keyApi}&query=${this.userSearch}&language=it-IT`;
-    },
-    currentSeriesUserSearch() {
-      return `${uri}tv?api_key=${keyApi}&language=it-IT&query=${this.userSearch}`;
-    }
-  },
   methods: {
-    getMovieContent(target) {
-      axios.get(target).then(res => {
+
+    getMovieContent(object) {
+      axios.get(`${uri}movie?api_key=${keyApi}&query=${object}&language=it-IT`).then(res => {
         store.Movies = res.data.results;
-      })
+      });
     },
 
-    getSeriesContent(target) {
-      axios.get(target).then(res => {
+    getSeriesContent(object) {
+      axios.get(`${uri}tv?api_key=${keyApi}&language=it-IT&query=${object}`).then(res => {
         store.Series = res.data.results;
-      })
+      });
+    },
+
+    getMediaContent(object) {
+      this.getMovieContent(object);
+      this.getSeriesContent(object)
     },
 
     getImagePath(target) {
-      const url = new URL(`./assets/img/${target}.png`, import.meta.url)
-      return url.href
+      const url = new URL(`./assets/img/${target}.png`, import.meta.url);
+      return url.href;
     },
 
     getCeilAvarage(object) {
@@ -47,20 +44,17 @@ export default {
     getImagePoster(object) {
       return `https://image.tmdb.org/t/p/w342${object}`;
     },
-
   },
+  components: { AppHeader }
 }
 </script>
 
 <template>
-  <input type="text" v-model.trim="userSearch">
-  <button @click="getMovieContent(currentMovieUserSearch),
-    getSeriesContent(currentSeriesUserSearch)">Cerca
-  </button>
+  <AppHeader @input-change="getMediaContent" />
 
   <h2>film</h2>
   <ul>
-    <li v-for="movie in store.Movies" :key="movie.id">
+    <li v-for=" movie  in  store.Movies " :key="movie.id">
       <h5>{{ movie.title }}</h5>
       <h5>{{ movie.original_title }}</h5>
       <div>
@@ -83,7 +77,7 @@ export default {
   <h2>serie</h2>
 
   <ul>
-    <li v-for="episode in store.Series" :key="episode.id">
+    <li v-for=" episode  in  store.Series " :key="episode.id">
       <h5>{{ episode.name }}</h5>
       <h5>{{ episode.original_name }}</h5>
       <div>
@@ -95,7 +89,8 @@ export default {
       <div>
         <FontAwsomeIcon :icon="['fas', 'star']" />
       </div>
-      <h5 v-show="episode.original_language != 'en' && episode.original_language != 'it'">{{ episode.original_language }}
+      <h5 v-show="episode.original_language != 'en' && episode.original_language != 'it'">{{ episode.original_language
+      }}
       </h5>
       <div>
         <img v-if="episode.original_language == 'en' || episode.original_language == 'it'"
