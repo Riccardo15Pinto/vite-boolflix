@@ -31,6 +31,15 @@ export default {
         store.Series = res.data.results;
       })
     },
+
+    getImagePath(target) {
+      const url = new URL(`./assets/img/${target}.png`, import.meta.url)
+      return url.href
+    },
+
+    getCeilAvarage(object) {
+      return Math.ceil(object)
+    }
   },
 }
 </script>
@@ -46,8 +55,9 @@ export default {
     <li v-for="movie in store.Movies" :key="movie.id">
       <h5>{{ movie.title }}</h5>
       <h5>{{ movie.original_title }}</h5>
-      <h5>{{ movie.original_language }}</h5>
-      <h5>{{ movie.vote_average }}</h5>
+      <h5 v-show="movie.original_language != 'en' && movie.original_language != 'it'">{{ movie.original_language }}</h5>
+      <h5>{{ getCeilAvarage(movie.vote_average) }}</h5>
+      <img :src="getImagePath(movie.original_language)" alt="">
     </li>
   </ul>
   <hr>
@@ -57,8 +67,11 @@ export default {
     <li v-for="episode in store.Series" :key="episode.id">
       <h5>{{ episode.name }}</h5>
       <h5>{{ episode.original_name }}</h5>
-      <h5>{{ episode.original_language }}</h5>
-      <h5>{{ episode.vote_average }}</h5>
+      <h5 v-show="episode.original_language != 'en' && episode.original_language != 'it'">{{ episode.original_language
+      }}
+      </h5>
+      <h5>{{ getCeilAvarage(episode.vote_average) }}</h5>
+      <img :src="getImagePath(episode.original_language)" alt="">
     </li>
   </ul>
 </template>
