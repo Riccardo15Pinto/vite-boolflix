@@ -1,5 +1,5 @@
 <script>
-import CardMain from './components/CardMain.vue';
+import CardMain from './CardMain.vue';
 export default {
     components: { CardMain },
 
@@ -7,7 +7,7 @@ export default {
 </script>
 
 <template>
-    <CardMain />/>
+    <CardMain />
 </template>
 
 <style scoped></style>
