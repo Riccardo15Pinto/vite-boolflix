@@ -1,6 +1,9 @@
 <script>
+import { store } from './data/data'
 export default {
-
+  data() {
+    return store
+  }
 }
 </script>
 
