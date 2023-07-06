@@ -16,7 +16,7 @@ export default {
             <div class="container-card">
                 <CardMain v-for="movie in Movies" :key="movie.id" :title="movie.title"
                     :original_title="movie.original_title" :image="movie.poster_path" :vote="movie.vote_average"
-                    :id="movie.id" :original_language="movie.original_language" />
+                    :id="movie.id" :original_language="movie.original_language" :overwiev="movie.overview" />
             </div>
         </section>
         <section v-show="Series.length > 0">
@@ -24,7 +24,7 @@ export default {
             <div class="container-card">
                 <CardMain v-for="episode in Series" :key="episode.id" :title="episode.name"
                     :original_title="episode.original_name" :image="episode.poster_path" :vote="episode.vote_average"
-                    :id="episode.id" :original_language="episode.original_language" />
+                    :id="episode.id" :original_language="episode.original_language" :overwiev="episode.overview" />
             </div>
         </section>
     </main>
