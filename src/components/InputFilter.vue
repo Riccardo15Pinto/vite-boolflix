@@ -1,19 +1,24 @@
 <script>
-
 export default {
     data() {
         return {
+            // input result
             userSearch: '',
         }
     },
+    // on click emit
     emits: ['Input-change'],
 }
 </script>
 
 <template>
+    <!-- container form -->
     <div id="form-container">
+        <!-- form -->
         <form @submit.prevent="$emit('Input-change', userSearch)">
-            <input type="text" v-model.trim="userSearch">
+            <!-- input -->
+            <input type="text" v-model.trim="userSearch" placeholder="Cerca....">
+            <!-- button -->
             <button>Cerca</button>
         </form>
     </div>
