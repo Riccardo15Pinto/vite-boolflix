@@ -19,6 +19,10 @@ export default {
         store[destination].forEach(element => {
           axios.get(`https://api.themoviedb.org/3/${endpoint}/${element.id}/credits?api_key=${keyApi}`).then(res => {
             store[target].push(res.data);
+            store[target].forEach((element) => {
+              element.cast.splice(5, element.cast.length - 1);
+            });
+
           });
         });
       });
