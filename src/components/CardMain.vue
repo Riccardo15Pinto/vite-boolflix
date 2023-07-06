@@ -1,6 +1,7 @@
 <script>
 export default {
     props: {
+        // props for cards
         title: 'string',
         original_title: 'string',
         image: 'string',
@@ -11,17 +12,19 @@ export default {
         cast: 'array'
     },
     computed: {
+        // check vote_average in card and return number 1 to 5
         getCeilAvarage() {
             return Math.ceil(this.vote / 2);
         },
     },
 
     methods: {
+        // get absolute url
         getImagePath(target) {
             const url = new URL(`../assets/img/${target}.png`, import.meta.url);
             return url.href;
         },
-
+        // get image poster
         getImagePoster(object) {
             return `https://image.tmdb.org/t/p/w342${object}`;
         },
@@ -29,15 +32,22 @@ export default {
 }
 </script>
 <template>
+    <!-- card -->
     <div :key="id" class="card">
+        <!-- poster/image section -->
         <div class="poster">
+            <!-- if poster not contains image -->
             <img v-if="!image" src="https://arice.leggere.it/arimg.ashx?e=9788871191959&k=gb&w=300&h=500" alt="">
+            <!-- image -->
             <img v-else :src="getImagePoster(image)" alt="">
         </div>
-        <div class="info-poster">
 
+        <!-- info card -->
+        <div class="info-poster">
+            <!-- title -->
             <h2>Titolo:{{ title }}</h2>
             <h2 v-if="title !== original_title">Titolo originale:{{ original_title }}</h2>
+            <!-- grades -->
             <div>
                 <h2>
                     Voto:
@@ -45,24 +55,25 @@ export default {
                     <FontAwsomeIcon :icon="['far', 'star']" v-for="n in 5 - getCeilAvarage" />
                 </h2>
             </div>
-
+            <!-- language -->
             <h2>
                 Lingua:
                 <span v-show="original_language != 'en' && original_language != 'it'">{{ original_language }}</span>
                 <img v-if="original_language == 'en' || original_language == 'it'" :src="getImagePath(original_language)"
                     alt="" class="flag">
             </h2>
+            <!-- overview -->
             <h2 v-if="overwiev">
                 Trama:
                 {{ overwiev }}
             </h2>
-            <div>
+            <!-- cast -->
+            <div v-if="cast.length > 0">
                 <h2>Cast:</h2>
                 <ul>
                     <li v-for="actor in cast">{{ actor.original_name || actor.name }}</li>
                 </ul>
             </div>
-
         </div>
     </div>
 </template>
@@ -102,8 +113,6 @@ export default {
         .full-star {
             color: gold;
         }
-
-
 
         .flag {
             width: 60px;
