@@ -27,8 +27,9 @@ header {
     align-items: center;
 
     h1 {
+        color: white;
         margin-left: 20px;
-        text-shadow: 0 0 10px white;
+        text-shadow: 0 0 10px black;
     }
 
     #form-container {
