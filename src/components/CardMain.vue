@@ -7,7 +7,8 @@ export default {
         vote: 'string',
         id: 'string',
         original_language: 'string',
-        overwiev: 'string'
+        overwiev: 'string',
+        cast: 'array'
     },
     computed: {
         getCeilAvarage() {
@@ -51,10 +52,16 @@ export default {
                 <img v-if="original_language == 'en' || original_language == 'it'" :src="getImagePath(original_language)"
                     alt="" class="flag">
             </h2>
-            <h2>
+            <h2 v-if="overwiev">
                 Trama:
                 {{ overwiev }}
             </h2>
+            <div>
+                <h2>Cast:</h2>
+                <ul>
+                    <li v-for="actor in cast">{{ actor.original_name || actor.name }}</li>
+                </ul>
+            </div>
 
         </div>
     </div>
