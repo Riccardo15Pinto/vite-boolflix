@@ -12,9 +12,9 @@ export default {
 
 <template>
     <div id="form-container">
-        <form @keyup="$emit('Input-change', userSearch)">
+        <form @submit.prevent="$emit('Input-change', userSearch)">
             <input type="text" v-model.trim="userSearch">
-            <button @click="$emit('Input-change', userSearch)">Cerca</button>
+            <button>Cerca</button>
         </form>
     </div>
 </template>
@@ -40,3 +40,4 @@ button {
     border-radius: 30px;
 }
 </style>
+
