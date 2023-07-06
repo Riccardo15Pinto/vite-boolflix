@@ -27,23 +27,74 @@ export default {
 }
 </script>
 <template>
-    <li :key="id">
-        <h5>{{ title }}</h5>
-        <h5>{{ original_title }}</h5>
-        <div>
-            <img v-if="image" :src="getImagePoster(image)" alt="">
+    <div :key="id" class="card">
+        <div class="poster">
             <img v-if="!image" src="https://arice.leggere.it/arimg.ashx?e=9788871191959&k=gb&w=300&h=500" alt="">
+            <img v-else :src="getImagePoster(image)" alt="">
         </div>
-        <div>
-            <FontAwsomeIcon :icon="['fas', 'star']" v-for="n in getCeilAvarage" />
-            <FontAwsomeIcon :icon="['far', 'star']" v-for="n in 5 - getCeilAvarage" />
+        <div class="info-poster">
+
+            <h2>Titolo:{{ title }}</h2>
+            <h2 v-if="title !== original_title">Titolo originale:{{ original_title }}</h2>
+            <div>
+                <h2>
+                    Voto:
+                    <FontAwsomeIcon :icon="['fas', 'star']" v-for="n in getCeilAvarage" />
+                    <FontAwsomeIcon :icon="['far', 'star']" v-for="n in 5 - getCeilAvarage" />
+                </h2>
+            </div>
+
+            <h2>
+                Lingua:
+                <span v-show="original_language != 'en' && original_language != 'it'">{{ original_language }}</span>
+                <img v-if="original_language == 'en' || original_language == 'it'" :src="getImagePath(original_language)"
+                    alt="" class="flag">
+            </h2>
+
         </div>
-        <h5 v-show="original_language != 'en' && original_language != 'it'">{{ original_language }}</h5>
-        <div>
-            <img v-if="original_language == 'en' || original_language == 'it'" :src="getImagePath(original_language)"
-                alt="">
-        </div>
-    </li>
+    </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.card {
+    margin: 10px;
+    position: relative;
+    cursor: pointer;
+
+    .poster {
+        width: 300px;
+        height: 400px;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .info-poster>* {
+        padding: 10px 0;
+    }
+
+    .info-poster {
+        display: none;
+        color: white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+
+
+        .flag {
+            width: 60px;
+            height: 30px;
+        }
+    }
+
+    &:hover .info-poster {
+        display: block;
+    }
+}
+</style>
