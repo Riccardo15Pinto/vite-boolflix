@@ -14,17 +14,19 @@ export default {
         <section v-show="Movies.length > 0">
             <h2>FILM</h2>
             <div class="container-card">
-                <CardMain v-for="movie in Movies" :key="movie.id" :title="movie.title"
+                <CardMain v-for="(movie, i) in Movies" :key="movie.id" :title="movie.title"
                     :original_title="movie.original_title" :image="movie.poster_path" :vote="movie.vote_average"
-                    :id="movie.id" :original_language="movie.original_language" :overwiev="movie.overview" />
+                    :id="movie.id" :original_language="movie.original_language" :overwiev="movie.overview"
+                    :cast="CastMovie[i].cast" />
             </div>
         </section>
         <section v-show="Series.length > 0">
             <h2>SERIE</h2>
             <div class="container-card">
-                <CardMain v-for="episode in Series" :key="episode.id" :title="episode.name"
+                <CardMain v-for="(episode, i) in Series" :key="episode.id" :title="episode.name"
                     :original_title="episode.original_name" :image="episode.poster_path" :vote="episode.vote_average"
-                    :id="episode.id" :original_language="episode.original_language" :overwiev="episode.overview" />
+                    :id="episode.id" :original_language="episode.original_language" :overwiev="episode.overview"
+                    :cast="CastSeries[i].cast" />
             </div>
         </section>
     </main>
