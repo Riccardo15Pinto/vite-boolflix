@@ -18,4 +18,21 @@ export default {
     </header>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+header {
+    height: 150px;
+    background-color: rgb(247, 46, 46);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+        margin-left: 20px;
+        text-shadow: 0 0 10px white;
+    }
+
+    #form-container {
+        margin-right: 20px;
+    }
+}
+</style>
