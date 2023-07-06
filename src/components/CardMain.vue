@@ -40,7 +40,7 @@ export default {
             <div>
                 <h2>
                     Voto:
-                    <FontAwsomeIcon :icon="['fas', 'star']" v-for="n in getCeilAvarage" />
+                    <FontAwsomeIcon :icon="['fas', 'star']" v-for="n in getCeilAvarage" class="full-star" />
                     <FontAwsomeIcon :icon="['far', 'star']" v-for="n in 5 - getCeilAvarage" />
                 </h2>
             </div>
@@ -91,6 +91,11 @@ export default {
         background-color: rgba(0, 0, 0, 0.7);
         padding: 10px;
         overflow: auto;
+
+        .full-star {
+            color: gold;
+        }
+
 
 
         .flag {
