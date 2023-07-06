@@ -13,21 +13,20 @@ export default {
 
   methods: {
 
-    getMovieContent(object) {
-      axios.get(`${uri}movie?api_key=${keyApi}&query=${object}&language=it-IT`).then(res => {
-        store.Movies = res.data.results;
-      });
-    },
-
-    getSeriesContent(object) {
-      axios.get(`${uri}tv?api_key=${keyApi}&language=it-IT&query=${object}`).then(res => {
-        store.Series = res.data.results;
+    fetchContent(object, endpoint, destination, target) {
+      axios.get(`${uri}${endpoint}?api_key=${keyApi}&query=${object}&language=it-IT`).then(res => {
+        store[destination] = res.data.results;
+        store[destination].forEach(element => {
+          axios.get(`https://api.themoviedb.org/3/${endpoint}/${element.id}/credits?api_key=${keyApi}`).then(res => {
+            store[target].push(res.data);
+          });
+        });
       });
     },
 
     getMediaContent(object) {
-      this.getMovieContent(object);
-      this.getSeriesContent(object)
+      this.fetchContent(object, 'movie', 'Movies', 'CastMovie')
+      this.fetchContent(object, 'tv', 'Series', 'CastSeries')
     },
 
   },
