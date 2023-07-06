@@ -11,10 +11,32 @@ export default {
 </script>
 
 <template>
-    <div>
-        <input type="text" v-model.trim="userSearch">
-        <button @click="$emit('Input-change', userSearch)">Cerca</button>
+    <div id="form-container">
+        <form @keyup="$emit('Input-change', userSearch)">
+            <input type="text" v-model.trim="userSearch">
+            <button @click="$emit('Input-change', userSearch)">Cerca</button>
+        </form>
     </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+input {
+    width: 250px;
+    padding: 10px;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    margin-right: 20px;
+
+
+    &:focus {
+        border: black;
+    }
+}
+
+button {
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border-radius: 30px;
+}
+</style>
