@@ -1,9 +1,13 @@
 <script>
+// import input component
 import InputFilter from '../components/InputFilter.vue';
 export default {
+    // rec component
     components: { InputFilter },
+    // rec emits
     emits: ['Input-change'],
     methods: {
+        // get data from input component to header to app
         getInputChange(object) {
             this.$emit('Input-change', object)
         }
@@ -12,8 +16,11 @@ export default {
 </script>
 
 <template>
+    <!-- header content -->
     <header>
+        <!-- title -->
         <h1>BOOLFLIX</h1>
+        <!-- input component -->
         <InputFilter @input-change="getInputChange" />
     </header>
 </template>
@@ -29,7 +36,7 @@ header {
     h1 {
         color: white;
         margin-left: 20px;
-        text-shadow: 0 0 10px black;
+        text-shadow: 0 0 20px black;
     }
 
     #form-container {
