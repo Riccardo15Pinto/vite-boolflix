@@ -6,7 +6,8 @@ export default {
         image: 'string',
         vote: 'string',
         id: 'string',
-        original_language: 'string'
+        original_language: 'string',
+        overwiev: 'string'
     },
     computed: {
         getCeilAvarage() {
@@ -50,6 +51,10 @@ export default {
                 <img v-if="original_language == 'en' || original_language == 'it'" :src="getImagePath(original_language)"
                     alt="" class="flag">
             </h2>
+            <h2>
+                Trama:
+                {{ overwiev }}
+            </h2>
 
         </div>
     </div>
@@ -85,6 +90,7 @@ export default {
         height: 100%;
         background-color: rgba(0, 0, 0, 0.7);
         padding: 10px;
+        overflow: auto;
 
 
         .flag {
