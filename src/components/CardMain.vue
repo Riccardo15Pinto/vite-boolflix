@@ -75,7 +75,7 @@ export default {
                     <li v-for="actor in cast">{{ actor.original_name || actor.name }}</li>
                 </ul>
             </div>
-            <div>
+            <div v-if="type.length">
                 <h2>Genere:</h2>
                 <ul>
                     <li v-for="n in type">{{ n.name }}</li>
