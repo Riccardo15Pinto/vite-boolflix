@@ -25,6 +25,7 @@ export default {
       axios.get(`${uri}${endpoint}?api_key=${keyApi}&query=${object}&language=it-IT`)
         .then((res) => {
           store[destination] = [];
+          store[target] = [];
           res.data.results.forEach((element) => {
             axios.get(`https://api.themoviedb.org/3/${endpoint}/${element.id}/credits?api_key=${keyApi}`)
               .then((res) => {
@@ -34,17 +35,15 @@ export default {
                 });
                 store[destination].push(element);
               })
-
           });
         });
-      // this
       store[destination].forEach(element => {
         axios.get(`https://api.themoviedb.org/3/${endpoint}/${element.id}?api_key=${keyApi}`)
           .then((res) => {
             store[category].push(res.data)
           });
-
       });
+      // this
     },
 
     // call two times fetchcontent
