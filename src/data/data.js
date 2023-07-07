@@ -9,4 +9,8 @@ export const store = reactive({
   CastMovie:[],
   // cast series
   CastSeries:[],
+  //movies list
+  MovieCategory:[],
+  //series list
+  SeriesCategory:[],
 })
