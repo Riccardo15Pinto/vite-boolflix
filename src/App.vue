@@ -34,20 +34,17 @@ export default {
                 });
                 store[destination].push(element);
               })
-              .catch(err => {
-                console.log(err)
-              })
-              .then(res => {
 
-                store[destination].forEach(element => {
-                  axios.get(`https://api.themoviedb.org/3/${endpoint}/${element.id}?api_key=${keyApi}`)
-                    .then((res) => {
-                      store[category].push(res.data)
-                    });
-                });
-              })
           });
         });
+      // this
+      store[destination].forEach(element => {
+        axios.get(`https://api.themoviedb.org/3/${endpoint}/${element.id}?api_key=${keyApi}`)
+          .then((res) => {
+            store[category].push(res.data)
+          });
+
+      });
     },
 
     // call two times fetchcontent
