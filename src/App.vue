@@ -33,18 +33,23 @@ export default {
                   element.cast.splice(5, element.cast.length - 1);
                 });
                 store[destination].push(element);
-              });
+              })
+              .catch(err => {
+                console.log(err)
+              })
+              .then(res => {
+
+                store[destination].forEach(element => {
+                  axios.get(`https://api.themoviedb.org/3/${endpoint}/${element.id}?api_key=${keyApi}`)
+                    .then((res) => {
+                      store[category].push(res.data)
+                    });
+                });
+              })
           });
         });
-      store[destination].forEach(element => {
-
-        axios.get(`https://api.themoviedb.org/3/${endpoint}/${element.id}?api_key=${keyApi}`)
-          .then((res) => {
-            store[category].push(res.data)
-
-          });
-      });
     },
+
     // call two times fetchcontent
     getMediaContent(object) {
       this.fetchContent(object, 'movie', 'Movies', 'CastMovie', 'MovieCategory')
