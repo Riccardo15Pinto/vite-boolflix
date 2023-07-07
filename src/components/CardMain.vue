@@ -9,7 +9,8 @@ export default {
         id: 'string',
         original_language: 'string',
         overwiev: 'string',
-        cast: 'array'
+        cast: 'array',
+        type: 'array'
     },
     computed: {
         // check vote_average in card and return number 1 to 5
@@ -72,6 +73,12 @@ export default {
                 <h2>Cast:</h2>
                 <ul>
                     <li v-for="actor in cast">{{ actor.original_name || actor.name }}</li>
+                </ul>
+            </div>
+            <div>
+                <h2>Genere:</h2>
+                <ul>
+                    <li v-for="n in type">{{ n.name }}</li>
                 </ul>
             </div>
         </div>
