@@ -34,14 +34,18 @@ export default {
                 });
                 store[destination].push(element);
               });
-            axios.get(`https://api.themoviedb.org/3/${endpoint}/${element.id}?api_key=${keyApi}`)
-              .then((res) => {
-                store[category].push(res.data)
-              });
           });
         });
+      store[destination].forEach(element => {
 
+        axios.get(`https://api.themoviedb.org/3/${endpoint}/${element.id}?api_key=${keyApi}`)
+          .then((res) => {
+            store[category].push(res.data)
+
+          });
+      });
     },
+    // call two times fetchcontent
     getMediaContent(object) {
       this.fetchContent(object, 'movie', 'Movies', 'CastMovie', 'MovieCategory')
       this.fetchContent(object, 'tv', 'Series', 'CastSeries', 'SeriesCategory')
@@ -51,7 +55,6 @@ export default {
 
 </script>
 
-// call two times fetchcontent
 <template>
   <!-- header component -->
   <!-- on click call getMediaContent -->
