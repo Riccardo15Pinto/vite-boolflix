@@ -21,18 +21,12 @@ export default {
 
   methods: {
     // call data from server
-    fetchContent(object, endpoint, destination, target) {
-      axios
-        .get(
-          `${uri}${endpoint}?api_key=${keyApi}&query=${object}&language=it-IT`
-        )
+    fetchContent(object, endpoint, destination, target, category) {
+      axios.get(`${uri}${endpoint}?api_key=${keyApi}&query=${object}&language=it-IT`)
         .then((res) => {
           store[destination] = [];
           res.data.results.forEach((element) => {
-            axios
-              .get(
-                `https://api.themoviedb.org/3/${endpoint}/${element.id}/credits?api_key=${keyApi}`
-              )
+            axios.get(`https://api.themoviedb.org/3/${endpoint}/${element.id}/credits?api_key=${keyApi}`)
               .then((res) => {
                 store[target].push(res.data);
                 store[target].forEach((element) => {
@@ -40,19 +34,24 @@ export default {
                 });
                 store[destination].push(element);
               });
+            axios.get(`https://api.themoviedb.org/3/${endpoint}/${element.id}?api_key=${keyApi}`)
+              .then((res) => {
+                store[category].push(res.data)
+              });
           });
         });
-    },
-    // call two times fetchcontent
-    getMediaContent(object) {
-      this.fetchContent(object, 'movie', 'Movies', 'CastMovie')
-      this.fetchContent(object, 'tv', 'Series', 'CastSeries')
-    },
 
-  },
+    },
+    getMediaContent(object) {
+      this.fetchContent(object, 'movie', 'Movies', 'CastMovie', 'MovieCategory')
+      this.fetchContent(object, 'tv', 'Series', 'CastSeries', 'SeriesCategory')
+    },
+  }
 }
+
 </script>
 
+// call two times fetchcontent
 <template>
   <!-- header component -->
   <!-- on click call getMediaContent -->
