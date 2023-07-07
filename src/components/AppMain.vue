@@ -24,7 +24,7 @@ export default {
                 <CardMain v-for="(movie, i) in Movies" :key="movie.id" :title="movie.title"
                     :original_title="movie.original_title" :image="movie.poster_path" :vote="movie.vote_average"
                     :id="movie.id" :original_language="movie.original_language" :overwiev="movie.overview"
-                    :cast="CastMovie[i].cast" />
+                    :cast="CastMovie[i].cast" :type="MovieCategory[i].genres" />
             </div>
         </section>
         <!-- series section -->
@@ -35,7 +35,7 @@ export default {
                 <CardMain v-for="(episode, i) in Series" :key="episode.id" :title="episode.name"
                     :original_title="episode.original_name" :image="episode.poster_path" :vote="episode.vote_average"
                     :id="episode.id" :original_language="episode.original_language" :overwiev="episode.overview"
-                    :cast="CastSeries[i].cast" />
+                    :cast="CastSeries[i].cast" :type="SeriesCategory[i].genres" />
             </div>
         </section>
     </main>
